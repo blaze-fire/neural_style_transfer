@@ -16,7 +16,7 @@ def load_image(image_file):
     
     im1 = img.save("temp.jpg")
     img = tf.io.read_file("./temp.jpg")
-    
+    os.remove("./temp.jpg") 
     return img
 
 def preprocess_image(img):
@@ -36,30 +36,17 @@ def main():
 
     st.subheader("Upload Images")
 
-    st.write("** Select two images, first being the source image and second one being the style image. **")
+    st.write("** Select only two images, with first being the source image and second one being the style image. **")
 
     images = st.file_uploader("Upload Image", type=['png', 'jpeg', 'jpg'], accept_multiple_files=True)
     
     if st.button("Process"):
         if images is not None:
-            # To See Details
-            # st.write(type(image_file))
-            # st.write(dir(image_file))
             
-            #file_details = {"Filename": content_image.name, "FileType": content_image.type, "FileSize": content_image.size}
-            
-            #st.write(file_details)
-            
-            #st.image(images[0])
             content_image = load_image(images[0])
             style_image = load_image(images[1])
             content_image = preprocess_image(content_image)
             style_image = preprocess_image(style_image)
-            st.write(content_image.dtype)   
-            #st.image(np.squeeze(content_image))
-            
-            #st.image(content_image)
-            #st.image(style_image)
             
             stylized_image = model(tf.constant(content_image), tf.constant(style_image))[0]
             st.image((np.squeeze(stylized_image)))
