@@ -36,7 +36,7 @@ def main():
 
     st.subheader("Upload Images")
 
-    st.write("** Select only two images, with first being the source image and second one being the style image. **")
+    st.write("** Select only two images, with first being the style image you want to apply and second one being the source image on which the style will be applied. **")
 
     images = st.file_uploader("Upload Image", type=['png', 'jpeg', 'jpg'], accept_multiple_files=True)
     
