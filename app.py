@@ -16,7 +16,7 @@ def load_image(image_file):
     
     im1 = img.save("temp.jpg")
     img = tf.io.read_file("./temp.jpg")
-    #os.remove("./temp.jpg") 
+    os.remove("./temp.jpg") 
     return img
 
 def preprocess_image(img):
